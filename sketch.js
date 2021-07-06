@@ -11,7 +11,7 @@ function preload() {
   white_sun = loadImage('assets/white-sun-cut2.jpg');
   nebula = loadImage('assets/nebula.png');
   ring_nebula = loadImage('assets/planetary nebula.jpg');
-  supernova = loadImage('assets/supernova.png');
+  supernova = loadImage('assets/supernova2.jpg');
   neutron_star = loadImage('assets/neutron_star.png');
   blackhole = loadImage('assets/blackhole.png');
 }
@@ -84,15 +84,15 @@ function draw() {
   } else if (val_s_mass <= 9 && val_s_mass > 2 && val_s_age >= 200) {
     // end of medium star
       let multiply;
-      if (val_s_age <= 230) {
+      if (val_s_age <= 260) {
           star_stat = "Red Giant";
           star_age = "Old age";
           // red giant
           rotateX(rX);
           rotateZ(rX);
           fill_g = map(val_s_mass,0.5,9,0,255);
-          fill_r = map(val_s_age,200,230,0,255);
-          multiply = map(val_s_age,200,230,1,2);
+          fill_r = map(val_s_age,200,260,0,255);
+          multiply = map(val_s_age,200,260,1,2);
           tint(255,fill_g-fill_r,0);
           texture(white_sun);
           sphere(star_size*multiply);
@@ -102,7 +102,7 @@ function draw() {
         star_age = "Death";
           // planetary nebula
           texture(ring_nebula);
-          plane(star_size*2.5,star_size*2.5);
+          plane(star_size*5,star_size*5);
       }
   } else if (val_s_mass <= 25 && val_s_mass > 9 && val_s_age >= 190) {
     // end of big star
@@ -133,7 +133,7 @@ function draw() {
           texture(neutron_star);
           plane(star_size*2.5,star_size*2.5);
       }
-  } else if (val_s_mass > 25 && val_s_age >= 150) {
+  } else if (val_s_mass > 25 && val_s_age >= 180) {
     // end of large star
     let multiply = 1;
     if (val_s_age <= 210) {
@@ -142,21 +142,21 @@ function draw() {
         star_age = "Old age";
         rotateX(rX);
         rotateZ(rX);
-        multiply = map(val_s_age,150,210,1,1.4);
-        fill_r = map(val_s_age,150,210,0.255);
+        multiply = map(val_s_age,180,210,1,1.4);
+        fill_r = map(val_s_age,180,210,0.255);
         fill_b = map(val_s_mass,25,30,0,255);
         tint(255,255-fill_r,fill_b-fill_r);
         texture(white_sun);
         sphere(star_size*multiply);
         rX += 0.005;
-    } else if (val_s_age <= 250) {
+    } else if (val_s_age <= 240) {
         // supernova
         star_stat = "Supernova";
         star_age = "Death";
         texture(supernova);
         plane(star_size*4,star_size*4);
     } else {
-        // blackholee
+        // blackhole
         star_stat = "Blackhole";
         star_age = "Remnant";
         texture(blackhole);
