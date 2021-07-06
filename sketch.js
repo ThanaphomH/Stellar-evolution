@@ -7,7 +7,7 @@ let supernova;
 let neutron_star;
 let blackhole;
 function preload() {
-  myfont = loadFont('assets/Inconsolata.ttf');
+  myfont = loadFont('assets/Inconsolata.otf');
   white_sun = loadImage('assets/white-sun-cut2.jpg');
   nebula = loadImage('assets/nebula.png');
   ring_nebula = loadImage('assets/planetary nebula.jpg');
@@ -174,11 +174,11 @@ function draw() {
   pop();
   
   
-  textSize(16);
+  textSize(20);
   fill(255);
   textFont(myfont);
   textAlign(LEFT,TOP);
-  text("Star age : " + val_s_age,-150+510,345);
+  text("Star age ",-150+510,345);
   text("Star mass: " + val_s_mass + " of the Sun",-150+510,375); 
 
   if (val_s_mass <= 2) {
