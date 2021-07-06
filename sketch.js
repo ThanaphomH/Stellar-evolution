@@ -35,8 +35,7 @@ let fill_r;
 let fill_g;
 let fill_b;
 let star_size;
-let star_text;
-let star_stat;
+let star_text , star_stat , star_age;
 function draw() {
   background(0);
   let val_s_age = s_age.value();
@@ -48,6 +47,7 @@ function draw() {
   if (val_s_age <= 50) {
     // nebula
     star_stat = "Nebula";
+    star_age = "Birth";
     texture(nebula);
     plane(star_size*2.5,star_size*2.5);
   } else if (val_s_mass <= 2 && val_s_age >= 180) {
@@ -58,6 +58,7 @@ function draw() {
     if (val_s_age <= 240) {
         // red giant
         star_stat = "Red Giant";
+        star_age = "Old age";
         multiply = map(val_s_age,180,240,1,3);
         fill_g = map(val_s_mass,0.5,9,0,255);
         fill_r = map(val_s_age,180,240,0,255);
@@ -65,12 +66,14 @@ function draw() {
     } else if (val_s_age <= 270) {
         // white dwarf
         star_stat = "White Dwarf";
+        star_age = "Death";
         multiply = map(val_s_age,240,270,3,0.5);
         let fill_w = map(val_s_age,240,270,0,255);
         tint(255,0+fill_w,0+fill_w);
     } else {
         // black dwarf
         star_stat = "Black Dwarf";
+        star_age = "Remnant";
         multiply = 0.5;
         let fill_b = map(val_s_age,270,300,0,255);
         tint(255-fill_b,255-fill_b,255-fill_b);
@@ -83,6 +86,7 @@ function draw() {
       let multiply;
       if (val_s_age <= 230) {
           star_stat = "Red Giant";
+          star_age = "Old age";
           // red giant
           rotateX(rX);
           rotateZ(rX);
@@ -95,6 +99,7 @@ function draw() {
           rX += 0.005;
       } else {
         star_stat = "Planetary nebula";
+        star_age = "Death";
           // planetary nebula
           texture(ring_nebula);
           plane(star_size*2.5,star_size*2.5);
@@ -105,6 +110,7 @@ function draw() {
       if (val_s_age <= 220) {
           // red giant
           star_stat = "Red Giant";
+          star_age = "Old age";
           rotateX(rX);
           rotateZ(rX);
           multiply = map(val_s_age,160,220,1,1.4);
@@ -117,11 +123,13 @@ function draw() {
       } else if (val_s_age <= 250) {
           // supernova
           star_stat = "Supernova";
+          star_age = "Death";
           texture(supernova);
           plane(star_size*4,star_size*4);
       } else {
           // neutron star
           star_stat = "Neutron Star";
+          star_age = "Remnant";
           texture(neutron_star);
           plane(star_size*2.5,star_size*2.5);
       }
@@ -131,6 +139,7 @@ function draw() {
     if (val_s_age <= 210) {
         // red giant
         star_stat = "Red Giant";
+        star_age = "Old age";
         rotateX(rX);
         rotateZ(rX);
         multiply = map(val_s_age,150,210,1,1.4);
@@ -143,17 +152,20 @@ function draw() {
     } else if (val_s_age <= 250) {
         // supernova
         star_stat = "Supernova";
+        star_age = "Death";
         texture(supernova);
         plane(star_size*4,star_size*4);
     } else {
         // blackholee
         star_stat = "Blackhole";
+        star_age = "Remnant";
         texture(blackhole);
         plane(star_size*2.5,star_size*2.5);
     }
   } else {
     // living star
     star_stat = "Star";
+    star_age = "Main Sequence";
     rotateX(rX);
     rotateZ(rX);
     if (val_s_mass <= 9) {
@@ -178,7 +190,7 @@ function draw() {
   fill(255);
   textFont(myfont);
   textAlign(LEFT,TOP);
-  text("Star age ",-150+510,345);
+  text("Star age : " + star_age,-150+510,345);
   text("Star mass: " + val_s_mass + " of the Sun",-150+510,375); 
 
   if (val_s_mass <= 2) {
