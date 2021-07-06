@@ -50,7 +50,7 @@ function draw() {
     star_age = "Birth";
     texture(nebula);
     plane(star_size*2.5,star_size*2.5);
-  } else if (val_s_mass <= 2 && val_s_age >= 180) {
+  } else if (val_s_mass <= 2 && val_s_age >= 210) {
     // end of small star
     rotateX(rX);
     rotateZ(rX);
@@ -59,9 +59,9 @@ function draw() {
         // red giant
         star_stat = "Red Giant";
         star_age = "Old age";
-        multiply = map(val_s_age,180,240,1,3);
+        multiply = map(val_s_age,210,240,1,3);
         fill_g = map(val_s_mass,0.5,9,0,255);
-        fill_r = map(val_s_age,180,240,0,255);
+        fill_r = map(val_s_age,210,240,0,255);
         tint(255,fill_g-fill_r,0);
     } else if (val_s_age <= 270) {
         // white dwarf
