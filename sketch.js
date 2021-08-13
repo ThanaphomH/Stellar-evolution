@@ -7,7 +7,7 @@ let supernova;
 let neutron_star;
 let blackhole;
 function preload() {
-  myfont = loadFont('assets/Inconsolata.otf');
+  myfont = loadFont('assets/radiance-regular.otf');
   white_sun = loadImage('assets/white-sun-cut2.jpg');
   nebula = loadImage('assets/nebula.png');
   ring_nebula = loadImage('assets/planetary nebula.jpg');
@@ -19,7 +19,7 @@ function preload() {
 let s_age,s_mass;
 function setup() {
   preload();
-  createCanvas(1200, 800,WEBGL);
+  createCanvas(1400, 800,WEBGL);
   s_age = createSlider(0,300,50,5);
   s_mass = createSlider(0.5,30,1,0.1);
   s_age.size(900,10);
