@@ -23,9 +23,9 @@ function setup() {
   s_age = createSlider(0,300,50,5);
   s_mass = createSlider(0.5,30,1,0.1);
   s_age.size(900,10);
-  s_age.position(50,750);
+  s_age.position(50+70,750);
   s_mass.size(900,10);
-  s_mass.position(50,780);
+  s_mass.position(50+70,780);
   
   
 }
