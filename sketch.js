@@ -20,8 +20,8 @@ let s_age,s_mass;
 function setup() {
   preload();
   createCanvas(1400, 800,WEBGL);
-  s_age = createSlider(0,300,50,5);
-  s_mass = createSlider(0.5,30,1,0.1);
+  s_age = createSlider(0,300,0,1);
+  s_mass = createSlider(0.01,30,0.01,0.01);
   s_age.size(900,10);
   s_age.position(50+70,750);
   s_mass.size(900,10);
@@ -50,77 +50,106 @@ function draw() {
     star_age = "Birth";
     texture(nebula);
     plane(star_size*2.5,star_size*2.5);
-  } else if (val_s_mass <= 2 && val_s_age >= 210) {
-    // end of small star
+  } else if (val_s_mass <= 0.08 && val_s_age >= 50) {
+    // end of tiny star
+    star_stat = "Brown Dwarf";
+    star_age = "Remnant";
+    rotateX(rX);
+    rotateZ(rX);
+    tint(100,45,0);
+    texture(white_sun);
+    sphere(star_size);
+    rX += 0.005;
+  } 
+  else if (val_s_mass <= 0.5 && val_s_mass > 0.08 && val_s_age >= 50) {
+    // end of Small star
     rotateX(rX);
     rotateZ(rX);
     let multiply = 1;
-    if (val_s_age <= 240) {
-        // red giant
-        star_stat = "Red Giant";
-        star_age = "Old age";
-        multiply = map(val_s_age,210,240,1,3);
-        fill_g = map(val_s_mass,0.5,9,0,255);
-        fill_r = map(val_s_age,210,240,0,255);
-        tint(255,fill_g-fill_r,0);
-    } else if (val_s_age <= 270) {
+    if (val_s_age <= 150) {
+        // red dwarf
+        star_stat = "Red Dwarf";
+        star_age = "Death";
+        tint(255,0,0);
+    } else {
         // white dwarf
         star_stat = "White Dwarf";
-        star_age = "Death";
-        multiply = map(val_s_age,240,270,3,0.5);
-        let fill_w = map(val_s_age,240,270,0,255);
-        tint(255,0+fill_w,0+fill_w);
-    } else {
-        // black dwarf
-        star_stat = "Black Dwarf";
         star_age = "Remnant";
-        multiply = 0.5;
-        let fill_b = map(val_s_age,270,300,0,255);
-        tint(255-fill_b,255-fill_b,255-fill_b);
+        if (val_s_age <= 200 && val_s_age >= 150) {
+          multiply = map(val_s_age,150,200,1,0.5);
+          let fill_b = map(val_s_age,150,200,0,255);
+          tint(255,fill_b,fill_b);
+        } else {
+          multiply = 0.5;
+          tint(255,255,255);
+        }
     }
     texture(white_sun);
     sphere(star_size*multiply);
     rX += 0.01;
-  } else if (val_s_mass <= 9 && val_s_mass > 2 && val_s_age >= 200) {
+  } else if (val_s_mass <= 9 && val_s_mass > 0.5 && val_s_age >= 180) {
     // end of medium star
       let multiply;
-      if (val_s_age <= 260) {
+      if (val_s_age <= 200) {
           star_stat = "Red Giant";
           star_age = "Old age";
           // red giant
           rotateX(rX);
           rotateZ(rX);
           fill_g = map(val_s_mass,0.5,9,0,255);
-          fill_r = map(val_s_age,200,260,0,255);
-          multiply = map(val_s_age,200,260,1,2);
+          fill_r = map(val_s_age,180,200,0,255);
+          multiply = map(val_s_age,180,200,1,2.5);
           tint(255,fill_g-fill_r,0);
           texture(white_sun);
           sphere(star_size*multiply);
           rX += 0.005;
-      } else {
+      } else if (val_s_age <= 240){
         star_stat = "Planetary nebula";
         star_age = "Death";
           // planetary nebula
           texture(ring_nebula);
           plane(star_size*5,star_size*5);
+      } else if (val_s_age <= 270) {
+        // white dwarf
+        star_stat = "White Dwarf";
+        star_age = "Remnant";
+        multiply = 0.5;
+        rotateX(rX);
+        rotateZ(rX);
+        tint(255,255,255);
+        texture(white_sun);
+        sphere(star_size*multiply);
+        rX += 0.01;
+      } else {
+        // black dwarf
+        star_stat = "Black Dwarf";
+        star_age = "Remnant";
+        multiply = 0.5;
+        rotateX(rX);
+        rotateZ(rX);
+        let fill_b = map(val_s_age,270,300,0,255);
+        tint(255-fill_b,255-fill_b,255-fill_b);
+        texture(white_sun);
+        sphere(star_size*multiply);
+        rX += 0.01;
       }
-  } else if (val_s_mass <= 25 && val_s_mass > 9 && val_s_age >= 190) {
+  } else if (val_s_mass <= 25 && val_s_mass > 9 && val_s_age >= 170) {
     // end of big star
       let multiply = 1;
-      if (val_s_age <= 220) {
+      if (val_s_age <= 190) {
           // red giant
-          star_stat = "Red Giant";
+          star_stat = "Red Supergiant";
           star_age = "Old age";
           rotateX(rX);
           rotateZ(rX);
-          multiply = map(val_s_age,160,220,1,1.4);
-          fill_r = map(val_s_age,160,220,0.255);
+          multiply = map(val_s_age,170,190,1,1.4);
+          fill_r = map(val_s_age,170,190,0.255);
           fill_b = map(val_s_mass,9,25,0,255);
           tint(255,255-fill_r,fill_b-fill_r);
           texture(white_sun);
           sphere(star_size*multiply);
           rX += 0.005;
-      } else if (val_s_age <= 250) {
+      } else if (val_s_age <= 230) {
           // supernova
           star_stat = "Supernova";
           star_age = "Death";
@@ -131,25 +160,25 @@ function draw() {
           star_stat = "Neutron Star";
           star_age = "Remnant";
           texture(neutron_star);
-          plane(star_size*2.5,star_size*2.5);
+          plane(star_size*3,star_size*3);
       }
-  } else if (val_s_mass > 25 && val_s_age >= 180) {
+  } else if (val_s_mass > 25 && val_s_age >= 160) {
     // end of large star
     let multiply = 1;
-    if (val_s_age <= 210) {
+    if (val_s_age <= 180) {
         // red giant
-        star_stat = "Red Giant";
+        star_stat = "Red Supergiant";
         star_age = "Old age";
         rotateX(rX);
         rotateZ(rX);
-        multiply = map(val_s_age,180,210,1,1.4);
-        fill_r = map(val_s_age,180,210,0.255);
+        multiply = map(val_s_age,160,180,1,1.4);
+        fill_r = map(val_s_age,160,180,0.255);
         fill_b = map(val_s_mass,25,30,0,255);
         tint(255,255-fill_r,fill_b-fill_r);
         texture(white_sun);
         sphere(star_size*multiply);
         rX += 0.005;
-    } else if (val_s_age <= 240) {
+    } else if (val_s_age <= 210) {
         // supernova
         star_stat = "Supernova";
         star_age = "Death";
@@ -160,10 +189,10 @@ function draw() {
         star_stat = "Blackhole";
         star_age = "Remnant";
         texture(blackhole);
-        plane(star_size*2.5,star_size*2.5);
+        plane(star_size*3,star_size*3);
     }
   } else {
-    // living star
+    // main sequence
     star_stat = "Star";
     star_age = "Main Sequence";
     rotateX(rX);
@@ -193,7 +222,9 @@ function draw() {
   text("Star age : " + star_age,-150+510,345);
   text("Star mass: " + val_s_mass + " of the Sun",-150+510,375); 
 
-  if (val_s_mass <= 2) {
+  if (val_s_mass <= 0.08) {
+      star_size = "Tiny Star";
+  } else if (val_s_mass <= 0.5) {
       star_size = "Small Star";
   } else if (val_s_mass <= 9) {
       star_size = "Medium Star";
