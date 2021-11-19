@@ -4,5 +4,3 @@
  Even though this project is 3D based model, some model I used 2D model instead cause it too hard to make in 3D (blackhole or nebula for example).
  
  This is my first project to learning P5.js.
- Sorry for low quality.
- I already tried my best. ;)
